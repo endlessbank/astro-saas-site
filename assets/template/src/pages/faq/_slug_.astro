@@ -1,0 +1,43 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const faqs = await getCollection('faq');
+  return faqs.map((faq) => ({
+    params: { slug: faq.slug },
+    props: { faq },
+  }));
+}
+
+const { faq } = Astro.props;
+const { Content } = await faq.render();
+
+// Get related FAQs (same category, excluding current)
+const allFaqs = await getCollection('faq');
+const relatedFaqs = allFaqs
+  .filter(f => f.data.category === faq.data.category && f.slug !== faq.slug)
+  .slice(0, 3);
+---
+
+<ContentLayout 
+  title={faq.data.question} 
+  description={`Answer to: ${faq.data.question}`}
+>
+  <Content />
+  
+  {relatedFaqs.length > 0 && (
+    <div class="{{FAQ_RELATED_CLASS}}">
+      <h3 class="{{FAQ_RELATED_HEADING_CLASS}}">Related Questions</h3>
+      <ul class="{{FAQ_RELATED_LIST_CLASS}}">
+        {relatedFaqs.map((related) => (
+          <li>
+            <a href={`/faq/${related.slug}`} class="{{FAQ_RELATED_LINK_CLASS}}">
+              {related.data.question}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+</ContentLayout>

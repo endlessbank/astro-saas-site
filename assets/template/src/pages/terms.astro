@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../config/site.config';
+---
+
+<BaseLayout title="Terms of Service" description={`Terms of Service for ${siteConfig.name}`}>
+  <article class="{{LEGAL_ARTICLE_CLASS}}">
+    <header class="{{LEGAL_HEADER_CLASS}}">
+      <h1 class="{{LEGAL_HEADING_CLASS}}">Terms of Service</h1>
+      <p class="{{LEGAL_UPDATED_CLASS}}">Last updated: [DATE]</p>
+    </header>
+    
+    <div class="{{LEGAL_CONTENT_CLASS}}">
+      <section>
+        <h2>Agreement to Terms</h2>
+        <p>
+          By accessing or using {siteConfig.name}, you agree to be bound by these Terms of 
+          Service. If you do not agree to these terms, please do not use our service.
+        </p>
+      </section>
+      
+      <section>
+        <h2>Description of Service</h2>
+        <p>
+          {siteConfig.name} provides {siteConfig.description.toLowerCase()}. We reserve the 
+          right to modify, suspend, or discontinue any part of the service at any time.
+        </p>
+      </section>
+      
+      <section>
+        <h2>User Accounts</h2>
+        <p>To access certain features, you must create an account. You agree to:</p>
+        <ul>
+          <li>Provide accurate and complete information</li>
+          <li>Maintain the security of your account credentials</li>
+          <li>Notify us immediately of any unauthorized access</li>
+          <li>Accept responsibility for all activity under your account</li>
+        </ul>
+      </section>
+      
+      <section>
+        <h2>Acceptable Use</h2>
+        <p>You agree not to:</p>
+        <ul>
+          <li>Use the service for any illegal purpose</li>
+          <li>Violate any applicable laws or regulations</li>
+          <li>Infringe on the rights of others</li>
+          <li>Attempt to gain unauthorized access to our systems</li>
+          <li>Interfere with the proper functioning of the service</li>
+          <li>Upload malicious code or content</li>
+          <li>Use the service to send spam or unsolicited communications</li>
+        </ul>
+      </section>
+      
+      <section>
+        <h2>Payment Terms</h2>
+        <p>
+          If you subscribe to a paid plan, you agree to pay the applicable fees. 
+          All payments are non-refundable except as required by law or as explicitly 
+          stated in our refund policy. We may change our pricing with notice to you.
+        </p>
+      </section>
+      
+      <section>
+        <h2>Intellectual Property</h2>
+        <p>
+          The service and its original content, features, and functionality are owned 
+          by {siteConfig.name} and are protected by copyright, trademark, and other 
+          intellectual property laws. You retain ownership of any content you submit 
+          through the service.
+        </p>
+      </section>
+      
+      <section>
+        <h2>Limitation of Liability</h2>
+        <p>
+          To the maximum extent permitted by law, {siteConfig.name} shall not be liable 
+          for any indirect, incidental, special, consequential, or punitive damages 
+          resulting from your use of the service. Our total liability shall not exceed 
+          the amount you paid us in the twelve months preceding the claim.
+        </p>
+      </section>
+      
+      <section>
+        <h2>Disclaimer of Warranties</h2>
+        <p>
+          The service is provided "as is" and "as available" without warranties of any 
+          kind, either express or implied, including but not limited to implied warranties 
+          of merchantability, fitness for a particular purpose, or non-infringement.
+        </p>
+      </section>
+      
+      <section>
+        <h2>Termination</h2>
+        <p>
+          We may terminate or suspend your account at any time for any reason, including 
+          violation of these terms. Upon termination, your right to use the service will 
+          immediately cease. You may also cancel your account at any time.
+        </p>
+      </section>
+      
+      <section>
+        <h2>Changes to Terms</h2>
+        <p>
+          We reserve the right to modify these terms at any time. We will provide notice 
+          of significant changes. Your continued use of the service after changes take 
+          effect constitutes acceptance of the new terms.
+        </p>
+      </section>
+      
+      <section>
+        <h2>Governing Law</h2>
+        <p>
+          These terms shall be governed by the laws of [JURISDICTION], without regard 
+          to its conflict of law provisions.
+        </p>
+      </section>
+      
+      <section>
+        <h2>Contact Us</h2>
+        <p>
+          If you have questions about these terms, please contact us at:
+          <br />
+          <strong>[EMAIL]</strong>
+        </p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,7 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#F3F4F6"/>
+  <rect x="200" y="150" width="400" height="300" rx="8" fill="#E5E7EB"/>
+  <path d="M350 300L400 250L450 300L500 250L550 300V400H350V300Z" fill="#D1D5DB"/>
+  <circle cx="380" cy="230" r="30" fill="#D1D5DB"/>
+  <text x="400" y="500" text-anchor="middle" fill="#9CA3AF" font-family="system-ui" font-size="16">Product Screenshot Placeholder</text>
+</svg>

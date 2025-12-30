@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { siteConfig } from '../../config/site.config';
+
+const faqs = (await getCollection('faq')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+// Group FAQs by category
+const faqsByCategory = faqs.reduce((acc, faq) => {
+  const category = faq.data.category;
+  if (!acc[category]) acc[category] = [];
+  acc[category].push(faq);
+  return acc;
+}, {} as Record<string, typeof faqs>);
+
+const categories = Object.keys(faqsByCategory);
+---
+
+<BaseLayout title="FAQ" description={`Frequently asked questions about ${siteConfig.name}`}>
+  <section class="{{FAQ_INDEX_SECTION_CLASS}}">
+    <div class="{{FAQ_INDEX_CONTAINER_CLASS}}">
+      <header class="{{FAQ_INDEX_HEADER_CLASS}}">
+        <h1 class="{{FAQ_INDEX_HEADING_CLASS}}">
+          Frequently Asked Questions
+        </h1>
+        <p class="{{FAQ_INDEX_SUBHEADING_CLASS}}">
+          Find answers to common questions about {siteConfig.name}. 
+          Can't find what you're looking for? Contact us.
+        </p>
+      </header>
+      
+      {categories.map((category) => (
+        <div class="{{FAQ_INDEX_CATEGORY_CLASS}}">
+          <h2 class="{{FAQ_INDEX_CATEGORY_HEADING_CLASS}}">{category}</h2>
+          <ul class="{{FAQ_INDEX_LIST_CLASS}}">
+            {faqsByCategory[category].map((faq) => (
+              <li>
+                <a href={`/faq/${faq.slug}`} class="{{FAQ_INDEX_LINK_CLASS}}">
+                  <span>{faq.data.question}</span>
+                  <svg class="{{FAQ_INDEX_ARROW_CLASS}}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

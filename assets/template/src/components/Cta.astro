@@ -1,0 +1,38 @@
+---
+import { siteConfig } from '../config/site.config';
+
+interface Props {
+  variant?: 'default' | 'final';
+  headline?: string;
+  subheadline?: string;
+}
+
+const { 
+  variant = 'default',
+  headline = "Ready to get started?",
+  subheadline = `Join thousands of users already using ${siteConfig.name}`
+} = Astro.props;
+---
+
+<section class={`{{CTA_SECTION_CLASS}} ${variant === 'final' ? '{{CTA_FINAL_CLASS}}' : ''}`}>
+  <div class="{{CTA_CONTAINER_CLASS}}">
+    <h2 class="{{CTA_HEADING_CLASS}}">
+      {headline}
+    </h2>
+    {subheadline && (
+      <p class="{{CTA_SUBHEADING_CLASS}}">
+        {subheadline}
+      </p>
+    )}
+    <div class="{{CTA_BUTTONS_CLASS}}">
+      <a href="/#pricing" class="{{CTA_PRIMARY_BTN_CLASS}}">
+        Get Started Free
+      </a>
+      {variant === 'default' && (
+        <a href="/faq" class="{{CTA_SECONDARY_BTN_CLASS}}">
+          Learn More
+        </a>
+      )}
+    </div>
+  </div>
+</section>

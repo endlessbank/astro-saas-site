@@ -1,0 +1,94 @@
+---
+import { siteConfig } from '../config/site.config';
+---
+
+<section class="{{PRICING_SECTION_CLASS}}" id="pricing">
+  <div class="{{PRICING_CONTAINER_CLASS}}">
+    <div class="{{PRICING_HEADER_CLASS}}">
+      <h2 class="{{PRICING_HEADING_CLASS}}">
+        {siteConfig.pricing.headline}
+      </h2>
+      <p class="{{PRICING_SUBHEADING_CLASS}}">
+        {siteConfig.pricing.subheadline}
+      </p>
+    </div>
+    
+    <!-- Billing Toggle -->
+    <div class="{{PRICING_TOGGLE_WRAPPER_CLASS}}">
+      <span class="{{PRICING_TOGGLE_LABEL_CLASS}}" data-period="monthly">Monthly</span>
+      <button 
+        class="{{PRICING_TOGGLE_BTN_CLASS}}"
+        id="billing-toggle"
+        aria-label="Toggle billing period"
+      >
+        <span class="{{PRICING_TOGGLE_INDICATOR_CLASS}}" id="toggle-indicator"></span>
+      </button>
+      <span class="{{PRICING_TOGGLE_LABEL_CLASS}}" data-period="yearly">
+        Yearly
+        <span class="{{PRICING_SAVE_BADGE_CLASS}}">Save 2 months</span>
+      </span>
+    </div>
+    
+    <!-- Pricing Cards -->
+    <div class="{{PRICING_CARDS_CLASS}}">
+      {siteConfig.pricing.plans.map((plan) => (
+        <div class={`{{PRICING_CARD_CLASS}} ${plan.highlighted ? '{{PRICING_CARD_HIGHLIGHTED_CLASS}}' : ''}`}>
+          {plan.highlighted && (
+            <div class="{{PRICING_POPULAR_BADGE_CLASS}}">Most Popular</div>
+          )}
+          
+          <h3 class="{{PRICING_PLAN_NAME_CLASS}}">{plan.name}</h3>
+          <p class="{{PRICING_PLAN_DESC_CLASS}}">{plan.description}</p>
+          
+          <div class="{{PRICING_PRICE_WRAPPER_CLASS}}">
+            <span class="{{PRICING_CURRENCY_CLASS}}">$</span>
+            <span class="{{PRICING_AMOUNT_CLASS}}" data-monthly={plan.monthlyPrice} data-yearly={plan.yearlyPrice}>
+              {plan.monthlyPrice}
+            </span>
+            <span class="{{PRICING_PERIOD_CLASS}}">/month</span>
+          </div>
+          
+          <ul class="{{PRICING_FEATURES_CLASS}}">
+            {plan.features.map((feature) => (
+              <li class="{{PRICING_FEATURE_CLASS}}">
+                <svg class="{{PRICING_CHECK_ICON_CLASS}}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                {feature}
+              </li>
+            ))}
+          </ul>
+          
+          <a 
+            href="#" 
+            class={`{{PRICING_CTA_CLASS}} ${plan.highlighted ? '{{PRICING_CTA_HIGHLIGHTED_CLASS}}' : '{{PRICING_CTA_DEFAULT_CLASS}}'}`}
+          >
+            {plan.cta}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const toggle = document.getElementById('billing-toggle');
+  const indicator = document.getElementById('toggle-indicator');
+  const prices = document.querySelectorAll('[data-monthly]');
+  let isYearly = false;
+
+  toggle?.addEventListener('click', () => {
+    isYearly = !isYearly;
+    indicator?.classList.toggle('translate-x-6', isYearly);
+    
+    prices.forEach((el) => {
+      const monthly = el.getAttribute('data-monthly');
+      const yearly = el.getAttribute('data-yearly');
+      if (isYearly && yearly) {
+        el.textContent = Math.round(parseInt(yearly) / 12).toString();
+      } else if (monthly) {
+        el.textContent = monthly;
+      }
+    });
+  });
+</script>

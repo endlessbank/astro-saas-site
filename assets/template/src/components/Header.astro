@@ -1,0 +1,55 @@
+---
+import { siteConfig } from '../config/site.config';
+---
+
+<header class="{{HEADER_CLASS}}">
+  <nav class="{{NAV_CONTAINER_CLASS}}">
+    <a href="/" class="{{LOGO_CLASS}}">
+      {siteConfig.name}
+    </a>
+    
+    <div class="hidden md:flex items-center gap-8">
+      {siteConfig.nav.map((item) => (
+        <a href={item.href} class="{{NAV_LINK_CLASS}}">
+          {item.label}
+        </a>
+      ))}
+    </div>
+    
+    <a href="/#pricing" class="{{HEADER_CTA_CLASS}}">
+      Get Started
+    </a>
+    
+    <!-- Mobile menu button -->
+    <button 
+      class="md:hidden {{MOBILE_MENU_BTN_CLASS}}" 
+      id="mobile-menu-btn"
+      aria-label="Toggle menu"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </nav>
+  
+  <!-- Mobile menu -->
+  <div class="hidden md:hidden {{MOBILE_MENU_CLASS}}" id="mobile-menu">
+    {siteConfig.nav.map((item) => (
+      <a href={item.href} class="{{MOBILE_NAV_LINK_CLASS}}">
+        {item.label}
+      </a>
+    ))}
+    <a href="/#pricing" class="{{MOBILE_CTA_CLASS}}">
+      Get Started
+    </a>
+  </div>
+</header>
+
+<script>
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  menuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+</script>

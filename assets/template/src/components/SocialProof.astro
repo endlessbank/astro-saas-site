@@ -1,0 +1,73 @@
+---
+import { siteConfig } from '../config/site.config';
+
+interface Props {
+  variant?: 'stats' | 'testimonial' | 'full';
+  testimonialIndex?: number;
+}
+
+const { variant = 'stats', testimonialIndex = 0 } = Astro.props;
+const testimonial = siteConfig.socialProof.testimonials[testimonialIndex];
+---
+
+{variant === 'stats' && (
+  <section class="{{SOCIAL_STATS_SECTION_CLASS}}">
+    <div class="{{SOCIAL_STATS_CONTAINER_CLASS}}">
+      <p class="{{SOCIAL_STATS_TEXT_CLASS}}">
+        {siteConfig.socialProof.stats}
+      </p>
+      <!-- Optional: Add logo strip here -->
+      <div class="{{SOCIAL_LOGOS_CLASS}}">
+        <span class="{{SOCIAL_LOGO_PLACEHOLDER_CLASS}}">Company</span>
+        <span class="{{SOCIAL_LOGO_PLACEHOLDER_CLASS}}">Company</span>
+        <span class="{{SOCIAL_LOGO_PLACEHOLDER_CLASS}}">Company</span>
+        <span class="{{SOCIAL_LOGO_PLACEHOLDER_CLASS}}">Company</span>
+      </div>
+    </div>
+  </section>
+)}
+
+{variant === 'testimonial' && testimonial && (
+  <section class="{{TESTIMONIAL_SECTION_CLASS}}">
+    <div class="{{TESTIMONIAL_CONTAINER_CLASS}}">
+      <blockquote class="{{TESTIMONIAL_QUOTE_CLASS}}">
+        "{testimonial.quote}"
+      </blockquote>
+      <div class="{{TESTIMONIAL_AUTHOR_CLASS}}">
+        <div class="{{TESTIMONIAL_AVATAR_CLASS}}">
+          {testimonial.author.charAt(0)}
+        </div>
+        <div>
+          <p class="{{TESTIMONIAL_NAME_CLASS}}">{testimonial.author}</p>
+          <p class="{{TESTIMONIAL_ROLE_CLASS}}">{testimonial.role}, {testimonial.company}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+)}
+
+{variant === 'full' && (
+  <section class="{{SOCIAL_FULL_SECTION_CLASS}}">
+    <div class="{{SOCIAL_FULL_CONTAINER_CLASS}}">
+      <h2 class="{{SOCIAL_FULL_HEADING_CLASS}}">What Our Users Say</h2>
+      <div class="{{TESTIMONIALS_GRID_CLASS}}">
+        {siteConfig.socialProof.testimonials.map((t) => (
+          <div class="{{TESTIMONIAL_CARD_CLASS}}">
+            <blockquote class="{{TESTIMONIAL_CARD_QUOTE_CLASS}}">
+              "{t.quote}"
+            </blockquote>
+            <div class="{{TESTIMONIAL_CARD_AUTHOR_CLASS}}">
+              <div class="{{TESTIMONIAL_CARD_AVATAR_CLASS}}">
+                {t.author.charAt(0)}
+              </div>
+              <div>
+                <p class="{{TESTIMONIAL_CARD_NAME_CLASS}}">{t.author}</p>
+                <p class="{{TESTIMONIAL_CARD_ROLE_CLASS}}">{t.role}, {t.company}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

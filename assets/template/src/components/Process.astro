@@ -1,0 +1,32 @@
+---
+import { siteConfig } from '../config/site.config';
+---
+
+<section class="{{PROCESS_SECTION_CLASS}}" id="process">
+  <div class="{{PROCESS_CONTAINER_CLASS}}">
+    <div class="{{PROCESS_HEADER_CLASS}}">
+      <h2 class="{{PROCESS_HEADING_CLASS}}">
+        {siteConfig.process.headline}
+      </h2>
+    </div>
+    
+    <div class="{{PROCESS_STEPS_CLASS}}">
+      {siteConfig.process.steps.map((step, index) => (
+        <div class="{{PROCESS_STEP_CLASS}}">
+          <div class="{{PROCESS_STEP_NUMBER_CLASS}}">
+            {step.number}
+          </div>
+          <h3 class="{{PROCESS_STEP_TITLE_CLASS}}">
+            {step.title}
+          </h3>
+          <p class="{{PROCESS_STEP_DESC_CLASS}}">
+            {step.description}
+          </p>
+          {index < siteConfig.process.steps.length - 1 && (
+            <div class="{{PROCESS_CONNECTOR_CLASS}}" aria-hidden="true" />
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

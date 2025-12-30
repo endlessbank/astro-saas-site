@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+import { siteConfig } from '../../config/site.config';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout title="Blog" description={`Tips, guides, and updates from the ${siteConfig.name} team`}>
+  <section class="{{BLOG_INDEX_SECTION_CLASS}}">
+    <div class="{{BLOG_INDEX_CONTAINER_CLASS}}">
+      <header class="{{BLOG_INDEX_HEADER_CLASS}}">
+        <h1 class="{{BLOG_INDEX_HEADING_CLASS}}">
+          The {siteConfig.name} Blog
+        </h1>
+        <p class="{{BLOG_INDEX_SUBHEADING_CLASS}}">
+          Tips, guides, and updates to help you get the most out of {siteConfig.name}.
+        </p>
+      </header>
+      
+      <div class="{{BLOG_INDEX_GRID_CLASS}}">
+        {posts.map((post) => (
+          <BlogCard
+            title={post.data.title}
+            description={post.data.description}
+            pubDate={post.data.pubDate}
+            slug={post.slug}
+            author={post.data.author}
+          />
+        ))}
+      </div>
+      
+      {posts.length === 0 && (
+        <p class="{{BLOG_INDEX_EMPTY_CLASS}}">
+          No posts yet. Check back soon!
+        </p>
+      )}
+    </div>
+  </section>
+</BaseLayout>

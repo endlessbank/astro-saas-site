@@ -1,0 +1,58 @@
+---
+import { siteConfig } from '../config/site.config';
+---
+
+<section class="{{FAQ_PREVIEW_SECTION_CLASS}}" id="faq-preview">
+  <div class="{{FAQ_PREVIEW_CONTAINER_CLASS}}">
+    <div class="{{FAQ_PREVIEW_HEADER_CLASS}}">
+      <h2 class="{{FAQ_PREVIEW_HEADING_CLASS}}">
+        Frequently Asked Questions
+      </h2>
+      <p class="{{FAQ_PREVIEW_SUBHEADING_CLASS}}">
+        Quick answers to common questions
+      </p>
+    </div>
+    
+    <div class="{{FAQ_PREVIEW_LIST_CLASS}}">
+      {siteConfig.faqPreview.map((faq, index) => (
+        <div class="{{FAQ_PREVIEW_ITEM_CLASS}}">
+          <button 
+            class="{{FAQ_PREVIEW_QUESTION_CLASS}}"
+            aria-expanded="false"
+            data-faq-toggle={index}
+          >
+            <span>{faq.question}</span>
+            <svg class="{{FAQ_PREVIEW_ICON_CLASS}}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="{{FAQ_PREVIEW_ANSWER_CLASS}} hidden" data-faq-answer={index}>
+            <p>{faq.answer}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="{{FAQ_PREVIEW_LINK_CLASS}}">
+      <a href="/faq" class="{{FAQ_PREVIEW_LINK_BTN_CLASS}}">
+        View All FAQs →
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const toggles = document.querySelectorAll('[data-faq-toggle]');
+  
+  toggles.forEach((toggle) => {
+    toggle.addEventListener('click', () => {
+      const index = toggle.getAttribute('data-faq-toggle');
+      const answer = document.querySelector(`[data-faq-answer="${index}"]`);
+      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+      
+      toggle.setAttribute('aria-expanded', (!isExpanded).toString());
+      answer?.classList.toggle('hidden');
+      toggle.querySelector('svg')?.classList.toggle('rotate-180');
+    });
+  });
+</script>

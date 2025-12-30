@@ -1,0 +1,32 @@
+---
+import { siteConfig } from '../config/site.config';
+---
+
+<section class="{{BENEFITS_SECTION_CLASS}}" id="benefits">
+  <div class="{{BENEFITS_CONTAINER_CLASS}}">
+    <div class="{{BENEFITS_HEADER_CLASS}}">
+      <h2 class="{{BENEFITS_HEADING_CLASS}}">
+        Why Choose {siteConfig.name}
+      </h2>
+      <p class="{{BENEFITS_SUBHEADING_CLASS}}">
+        Everything you need to work smarter, not harder.
+      </p>
+    </div>
+    
+    <div class="{{BENEFITS_GRID_CLASS}}">
+      {siteConfig.benefits.map((benefit) => (
+        <div class="{{BENEFIT_CARD_CLASS}}">
+          <div class="{{BENEFIT_ICON_CLASS}}">
+            {benefit.icon}
+          </div>
+          <h3 class="{{BENEFIT_TITLE_CLASS}}">
+            {benefit.title}
+          </h3>
+          <p class="{{BENEFIT_DESCRIPTION_CLASS}}">
+            {benefit.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

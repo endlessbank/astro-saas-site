@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import SocialProof from '../components/SocialProof.astro';
+import Benefits from '../components/Benefits.astro';
+import Process from '../components/Process.astro';
+import Pricing from '../components/Pricing.astro';
+import AboutUs from '../components/AboutUs.astro';
+import FaqPreview from '../components/FaqPreview.astro';
+import Cta from '../components/Cta.astro';
+---
+
+<BaseLayout>
+  <!-- Hero Section -->
+  <Hero />
+  
+  <!-- Social Proof: Stats -->
+  <SocialProof variant="stats" />
+  
+  <!-- Benefits -->
+  <Benefits />
+  
+  <!-- Social Proof: Testimonial -->
+  <SocialProof variant="testimonial" testimonialIndex={0} />
+  
+  <!-- Process -->
+  <Process />
+  
+  <!-- Pricing -->
+  <Pricing />
+  
+  <!-- CTA after Pricing -->
+  <Cta headline="Start your free trial today" />
+  
+  <!-- About Us -->
+  <AboutUs />
+  
+  <!-- Social Proof: Full Testimonials -->
+  <SocialProof variant="full" />
+  
+  <!-- FAQ Preview -->
+  <FaqPreview />
+  
+  <!-- Final CTA -->
+  <Cta variant="final" headline="Ready to transform your workflow?" />
+</BaseLayout>
